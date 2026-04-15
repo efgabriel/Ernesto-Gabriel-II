@@ -1,0 +1,172 @@
+/* --- Global Fix for Horizontal Scroll --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* --- Navbar General --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 25px 0;
+  z-index: 1000;
+  background-color: transparent;
+  transition: all 0.4s ease-in-out;
+}
+
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 15px 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.navbar-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px 0;
+  width: 100%;
+}
+
+.navbar-logo {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+/* --- Navbar Underline Animation Logic --- */
+.navbar-links {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  padding: 5px 0;
+  /* Space for the underline */
+  transition: color 0.3s ease;
+}
+
+/* Create the underline using ::after */
+.navbar-links::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, #0078ff, #00c6ff);
+  transition: width 0.3s ease-in-out;
+}
+
+/* Hover State */
+/* .navbar-links:hover {
+  color: #0078ff;
+} */
+
+.navbar-links:hover::after {
+  width: 100%;
+}
+
+/* .navbar-links.active {
+  color: #0078ff;
+} */
+
+.navbar-links.active::after {
+  width: 100%;
+}
+
+/* --- Mobile Icon --- */
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1100;
+}
+
+.bar {
+  width: 22px;
+  height: 1.7px;
+  background-color: #fff;
+  transition: 0.3s;
+}
+
+/* --- Responsive/Mobile Styles --- */
+@media screen and (max-width: 1100px) {
+  .navbar-logo {
+    color: #fff;
+    font-size: 21px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .navbar-container {
+    justify-content: space-between;
+  }
+
+  .menu-icon {
+    display: flex;
+  }
+
+  .navbar-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 200px;
+    height: 100vh;
+    background: #000000;
+    transition: right 0.4s ease-in-out;
+    padding-top: 100px;
+    gap: 40px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .navbar-menu.active {
+    right: 0;
+  }
+
+  .navbar-item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar-links {
+    font-size: 18px;
+    display: inline-block;
+  }
+
+  .bar.open:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .bar.open:nth-child(2) {
+    opacity: 0;
+  }
+
+  .bar.open:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}

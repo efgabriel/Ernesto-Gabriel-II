@@ -1,0 +1,234 @@
+/* Section & Container */
+.about-section {
+  padding: 120px 0;
+  background-color: #121212; /* Dark base to make glass pop */
+  color: #e0e0e0;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Glassmorphism About Box */
+.about-box {
+  position: relative;
+  padding: 50px 40px;
+  background: rgba(255, 255, 255, 0.04); 
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  
+  /* Dual Shadow: Depth + Blue Glow */
+/*   box-shadow: 
+    0 13px 25px -10px rgba(0, 0, 0, 0.7), 
+    0 0 20px rgba(0, 120, 255, 0.15);  */
+    
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
+  overflow: hidden;
+}
+
+.about-box.fade-in-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtle light streak highlight */
+.about-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 20% 20%, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-left, .about-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Profile Section */
+.profile-details-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.profile-img-container {
+  flex: 0 0 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 119, 255, 0.4);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+/*   box-shadow: 0 0 15px rgba(0, 119, 255, 0.3); */
+}
+
+.profile-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-info p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #b3b3b3;
+}
+
+.info-title {
+  font-weight: 600;
+  color: #fff;
+}
+
+.skills-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* Tech Stack Glass Tiles */
+.tech-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.tech-stack-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.tech-stack-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.tech-stack-item:hover .tech-stack-icon-wrapper {
+  background-color: rgba(0, 120, 255, 0.2);
+  border-color: rgba(0, 120, 255, 0.5);
+  box-shadow: 0 0 15px rgba(0, 120, 255, 0.4);
+}
+
+.tech-stack-icon {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.tech-stack-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #b3b3b3;
+  text-align: center;
+}
+
+/* About Me Content */
+.about-me-title-wrapper {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.about-me-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.about-me-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background-color: #0078ff;
+  box-shadow: 0 0 8px rgba(0, 120, 255, 0.6);
+}
+
+.about-me-desc {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #b3b3b3;
+  margin-bottom: 25px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.2s ease-out;
+}
+
+.about-me-desc.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes shake-animation {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg) translateX(2px); }
+  50% { transform: rotate(-5deg) translateX(-2px); }
+  75% { transform: rotate(5deg) translateX(2px); }
+  100% { transform: rotate(0deg); }
+}
+
+.tech-stack-item.shake-on-load {
+  animation: shake-animation 0.5s ease-in-out 2; 
+}
+
+.tech-stack-item:hover {
+  animation: shake-animation 0.4s ease-in-out infinite !important;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 1000px) {
+  .about-me-title { font-size: 1.7rem; }
+  .tech-stack-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .tech-stack-grid { grid-template-columns: repeat(3, 1fr); }
+  .about-box { padding: 40px 20px; }
+}
+
+@media (max-width: 480px) {
+  .tech-stack-grid { grid-template-columns: repeat(2, 1fr); }
+  .profile-details-wrapper { flex-direction: column; align-items: center; text-align: center; }
+}
